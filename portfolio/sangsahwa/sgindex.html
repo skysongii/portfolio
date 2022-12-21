@@ -41,9 +41,7 @@
             <div class="container px-4 px-lg-5 h-100">
                 <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-8 align-self-end">
-                        <p class="typing-title">어서와요.
-                        당신의 스트레스를 해소해줄<br>
-                        노이즈 메이커예요.</p>
+                        <p class="typing-title">어서와요. 당신의 스트레스를 해소해줄 노이즈 메이커예요.</p>
                         <p class="typing"></p>
                         
                     </div>
@@ -119,16 +117,4 @@
        } 
     }  
 
-    function typingMain(){ 
-      if(typingIdx<mainTyping.length){ 
-        // 타이핑될 텍스트 길이만큼 반복 
-        $(".typing").append(mainTyping[typingIdx]);
-        // 한글자씩 이어준다. 
-        typingIdx++; 
-       } else{ 
-         //끝나면 반복종료 
-        clearInterval(tyInt); 
-        
-       } 
-    }  
     </script>
