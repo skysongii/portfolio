@@ -1392,6 +1392,11 @@ progress {
     width: 50%;
   }
 
+  .col-lg-6-2 {
+    flex: 0 auto;
+    width: 50%;
+  }
+
   .col-lg-7 {
     flex: 0 0 auto;
     width: 58.33333333%;
@@ -11591,4 +11596,9 @@ footer.footer .social-link:hover {
 
 #phone-number {
   text-decoration: none;
+}
+
+.js-phone-number {
+  color:white;
+  
 }

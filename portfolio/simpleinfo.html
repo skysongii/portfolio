@@ -53,7 +53,7 @@
                             <img class="img-fluid" src="assets/img/career.jpg" alt="..." />
                         </a>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6-2">
                         <a class="portfolio-item" href="#!">
                             <div class="caption">
                                 <div class="caption-content">
@@ -116,7 +116,7 @@
 
 function callMethod(type) {
     if(type == 1) {
-        $("#call-method").text("010-8630-9414");
+        $("#call-method").html('<a id="phone-number" class="js-phone-number" href="tel:010-8630-9414">010-8630-9414</a>');
     } else if(type == 2) {
         $("#call-method").text("tjsgh9414@naver.com");
     }
