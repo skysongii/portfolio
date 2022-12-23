@@ -11519,7 +11519,12 @@ header.masthead h1, header.masthead .h1 {
   
 } 
 
-.typing {  
+.typing-main {
+  display:none;
+}
+
+
+.typing-head {  
   /*position: absolute;*/ 
     display: inline-block; 
     animation-name: cursor; 

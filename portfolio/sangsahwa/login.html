@@ -15,6 +15,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/sgstyles.css" rel="stylesheet" />
+    <!-- <link rel="import" href="../jquery.html"> -->
+    <!-- <script src="../jquery.js""></script> -->
+    <!-- <script type="text/javascript" src="../jquery.js" defer></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
@@ -40,7 +44,10 @@
                     <input type="text" name="username" placeholder="아이디를 입력하는 곳이에요:)">
                     <input type="password" name="userpassword" placeholder="비밀번호를 입력하는 곳이에요:)">
                     <input type="submit" value="로그인 후 마음껏 즐기세요!">
+                    <input type="button" style="width:100%" value="회원이 아니신가요?" onclick="goJoinPage();">
+
                 </form>
+                
             </div>
         </div>
     </div>
@@ -61,3 +68,9 @@
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+<script>
+    function goJoinPage() {
+        location.href="./register.html";
+    }
+</script>

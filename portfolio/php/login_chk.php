@@ -6,7 +6,7 @@ $user_id    = $_POST["username"];
 $user_pwd = $_POST["userpassword"];
 
 echo $user_id."\n<br>";
-echo $user_pwd;
+echo $user_pwd."<br>";
 $ROOT_PATH = "/dashboard/src/portfolio";
 include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/php/conn.php";
 
@@ -17,5 +17,9 @@ if($db_chk == 1) {
         alert("서버와의 통신 중 오류가 발생하였습니다.");
         history.back();
     </script>
- <?php } ?>
-    
+ <?php }
+
+
+$select_query = "select id, password from sguser where id='$user_id' and password='$user_pwd'";
+$result_query = mysqli_query($conn, $select_query);
+var_dump($result_query->num_rows);

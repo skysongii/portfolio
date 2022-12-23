@@ -11308,6 +11308,10 @@ animation-iteration-count: infinite;
   display:none;
 } 
 
+.typing-main {
+  display:none;
+}
+
 .typing {  
   /*position: absolute;*/ 
     display: inline-block; 
