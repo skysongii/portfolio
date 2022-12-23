@@ -6,6 +6,7 @@ $dbname = "portfolio";
 
 $db_chk = 0;
 
+
 $conn = new mysqli($server, $user, $password, $dbname);
 
 if ($conn->connect_error) {

@@ -8,6 +8,7 @@ $user_pwd = $_POST["userpassword"];
 echo $user_id."\n<br>";
 echo $user_pwd."<br>";
 $ROOT_PATH = "/dashboard/src/portfolio";
+
 include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/php/conn.php";
 
 if($db_chk == 1) {

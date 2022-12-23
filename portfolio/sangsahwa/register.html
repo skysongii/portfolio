@@ -7,27 +7,30 @@
     <title>네이버 회원가입 폼</title>
     <!-- <link rel="icon" href="./images/images2/favicon.png"> -->
     <link rel="stylesheet" href="./css/register.css">
+    <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+
 </head>
 <body>
     
     <div class="member">
-        <form>
+        <form method="post" action="../php/register_chk.php" id="register-form">
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input type="text"></span>
-        </div>
+            <span class="placehold-text" style="float:left;"><input type="text" id="reg-userid" name="reg-userid" placeholder="아이디를 입력하는 곳이에요:)" maxlength="10"></span>
+            <input type="button" id="id_chk_btn" style="width:100px; height:47px; background-color:orange; cursor:pointer" value="중복체크"></span>            
+        </div><br>
         <div class="field">
             <b>비밀번호</b>
-            <input class="userpw" type="password">
+            <input class="reg-userpwd" name="reg-userpwd" type="password">
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
-            <input class="userpw-confirm" type="password">
+            <input class="reg-userpwd-confirm" name="reg-userpwd-confirm" type="password">
         </div>
         <div class="field">
             <b>이름</b>
-            <input type="text">
+            <input name="reg-username" type="text">
         </div>
 
         <!-- 3. 필드(생년월일) -->
@@ -70,3 +73,15 @@
 
 </body>
 </html>
+
+<script>
+    $(document).ready(function() {
+
+    });
+       
+    $("#id_chk_btn").on("click", function() {
+        var reg_user_id = $("#reg-userid").val();
+        console.log(reg_user_id);
+        
+    })
+</script>
