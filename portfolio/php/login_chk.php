@@ -33,6 +33,9 @@ $row_num = mysqli_num_rows($result_query);
 if($row_num == 0) {
     echo "<script>alert('아이디 혹은 비밀번호가 일치하지 않습니다.')</script>";
     echo "<script>history.back()</script>";
+} else {
+    echo "<h1>$user_id</>";
+    echo "<h1>$user_pwd</>";
 }
 // echo $row_num;
 echo "<br>";
