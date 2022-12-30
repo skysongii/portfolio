@@ -13,8 +13,8 @@ if($db_chk == 1) {
     
 } else { ?>
     <script>
-        alert("서버와의 통신 중 오류가 발생하였습니다.");
-        history.back();
+        // alert("서버와의 통신 중 오류가 발생하였습니다.");
+        // history.back();
     </script>
  <? }
 
@@ -30,6 +30,9 @@ $select_query = "SELECT
 $result_query = mysqli_query($conn, $select_query);
 
 $row_num = mysqli_num_rows($result_query);
-echo $row_num;
+if($row_num == 0) {
+    echo "<script>alert('아이디 혹은 비밀번호가 일치하지 않습니다.')</script>";
+    echo "<script>history.back()</script>";
+}
+// echo $row_num;
 echo "<br>";
-var_dump($result_query->num_rows);
