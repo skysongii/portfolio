@@ -20,8 +20,16 @@ if($db_chk == 1) {
 
 
 // $select_query = "select id, password from sguser where id='$user_id' and password='$user_pwd'";
-$select_query = "select id, password from sguser where id = '$user_id' and password = ;";
+$select_query = "SELECT 
+                    id, password 
+                FROM 
+                    sguser 
+                WHERE 
+                    id='$user_id' and password = HEX(AES_ENCRYPT('$user_pwd', SHA2('mmoa@Jjin010!',256)));";
 
 $result_query = mysqli_query($conn, $select_query);
-var_dump($result_query);
+
+$row_num = mysqli_num_rows($result_query);
+echo $row_num;
+echo "<br>";
 var_dump($result_query->num_rows);
