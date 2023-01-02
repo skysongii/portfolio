@@ -32,4 +32,13 @@ $result_query = mysqli_query($conn, $select_query);
 $row_num = mysqli_num_rows($result_query);
 echo $row_num;
 echo "<br>";
-var_dump($result_query->num_rows);
+
+if ($row_num > 0) {
+    session_start();
+    $_SESSION['user_id'] = $user_id;
+    $usr_id = $_SESSION['user_id'];
+    echo "어서오세요. $usr_id 님";
+} else {
+    echo "<script>alert('아이디 혹은 비밀번호가 일치하지 않습니다.')</script>";
+    echo "<script>history.back()</script>";
+}
