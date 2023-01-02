@@ -17,48 +17,25 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text" style="float:left;"><input type="text" id="reg-userid" name="reg-userid" placeholder="아이디를 입력하는 곳이에요:)" maxlength="10"></span>
-            <input type="button" id="id_chk_btn" style="width:100px; height:47px; background-color:orange; cursor:pointer" value="중복체크"></span>            
+            <span  class="placehold-text" style="float:left;"><input id="reg-userid" type="text" name="reg-userid" placeholder="아이디를 입력하는 곳이에요:)" maxlength="10"></span>
+            <input type="button" id="id-chk-btn" style="width:100px; height:47px; background-color:orange; cursor:pointer" value="중복체크"></span>            
         </div><br>
         <div class="field">
             <b>비밀번호</b>
-            <input class="reg-userpwd" name="reg-userpwd" type="password">
+            <input id="reg-pwd" class="reg-userpwd" name="reg-userpwd" type="password">
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
-            <input class="reg-userpwd-confirm" name="reg-userpwd-confirm" type="password">
+            <input id="reg-pwd-confirm" class="reg-userpwd-confirm" name="reg-userpwd-confirm" type="password">
         </div>
         <div class="field">
             <b>이름</b>
             <input name="reg-username" type="text">
         </div>
 
-        <!-- 3. 필드(생년월일) -->
-        <!-- <div class="field birth">
-            <b>생년월일</b>
-            <div>
-                <input type="number" placeholder="년(4자)">                
-                <select>
-                    <option value="">월</option>
-                    <option value="">1월</option>
-                    <option value="">2월</option>
-                    <option value="">3월</option>
-                    <option value="">4월</option>
-                    <option value="">5월</option>
-                    <option value="">6월</option>
-                    <option value="">7월</option>
-                    <option value="">8월</option>
-                    <option value="">9월</option>
-                    <option value="">10월</option>
-                    <option value="">11월</option>
-                    <option value="">12월</option>
-                </select>
-                <input type="number" placeholder="일">
-            </div>
-        </div> -->
 
         <!-- 6. 가입하기 버튼 -->
-        <input class="mouseover" type="submit" value="가입하기">
+        <input id="reg-button" class="mouseover" type="button" value="가입하기">
     </form>
         <!-- 7. 푸터 -->
         <div class="member-footer">
@@ -75,13 +52,66 @@
 </html>
 
 <script>
+    var id_chk = 0;
+
     $(document).ready(function() {
 
     });
        
-    $("#id_chk_btn").on("click", function() {
+    $("#id-chk-btn").on("click", function() {
         var reg_user_id = $("#reg-userid").val();
-        console.log(reg_user_id);
-        
-    })
+
+        $.ajax({
+            type    : 'post',
+            url : '../php/register_id_chk.php',
+            // dataType : "json",
+            data     : {
+                id : reg_user_id
+            },
+            success  : function(data){
+                // data -> 0 : 아이디 존재
+                if(data == 0) {
+                    alert("이미 사용된 아이디입니다.");
+                    id_chk = 0;
+                    idChkVal(id_chk);
+
+                    // console.log("high : ", id_chk)
+
+                } else if (data == 1) {
+                    // data => 1 : 아이디 사용 가능
+                    alert("사용 가능한 아이디입니다.");
+                    id_chk = 1;
+                    idChkVal(id_chk);
+                    
+                } else {
+                    alert("서버와의 접속이 원활하지 않습니다. 메인 페이지로 돌아갑니다.");
+                    id_chk = 0;
+                    locaion.href = 'http://localhost/dashboard/src/portfolio/sangsahwa/sgindex.html';
+                }
+                
+            },
+        });
+    });
+
+    function idChkVal(val) {
+        var reg_user_id = $("#reg-userid").val();
+
+        $("#reg-button").on("click", function() {
+            // console.log(val);
+            /*
+                1. 아이디, 비밀번호, 이름 셋 중 하나라도 비어있으면 컷
+                2. 아이디 중복확인이 안되어있으면 컷
+                3. 비밀번호가 서로 다르면 컷
+            */
+            if(val == 0) {
+                alert("아이디 중복확인을 해주세요.");
+            } 
+            else if (val == 1 ){
+              console.log(reg_user_id.length); 
+            }
+        });
+    };
+
+
+
 </script>
