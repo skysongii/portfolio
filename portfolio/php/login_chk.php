@@ -34,7 +34,7 @@ if($row_num == 0) {
     echo "<script>alert('아이디 혹은 비밀번호가 일치하지 않습니다.')</script>";
     echo "<script>history.back()</script>";
 } else {
-    echo 
+    echo "<script>location.href=''";    // 로그인 성공시 리다이렉트
 }
 // echo $row_num;
 echo "<br>";
