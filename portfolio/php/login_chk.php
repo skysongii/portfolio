@@ -38,6 +38,6 @@ if($row_num == 0) {
     $_SESSION['user_id'] = $user_id;
     $usr_id = $_SESSION['user_id'];
 
-    echo "<script>alert('$ROOT_PATH/sangsahwa/sgindex.html');</script>";    // 로그인 성공시 리다이렉트
-    // echo "<script>location.href='$ROOT_PATH/'';</script>";    // 로그인 성공시 리다이렉트
+    // echo "<script>alert('$ROOT_PATH/sangsahwa/sgindex.html');</script>";    // 로그인 성공시 리다이렉트
+    echo "<script>location.href='$ROOT_PATH/sangsahwa/sgindex.html';</script>";    // 로그인 성공시 리다이렉트
 }
