@@ -33,18 +33,11 @@ $row_num = mysqli_num_rows($result_query);
 if($row_num == 0) {
     echo "<script>alert('아이디 혹은 비밀번호가 일치하지 않습니다.')</script>";
     echo "<script>history.back()</script>";
-} else {
-    echo "<script>location.href=''";    // 로그인 성공시 리다이렉트
-}
-// echo $row_num;
-echo "<br>";
-
-if ($row_num > 0) {
+} else if ($row_num > 0) {
     session_start();
     $_SESSION['user_id'] = $user_id;
     $usr_id = $_SESSION['user_id'];
-    echo "어서오세요. $usr_id 님";
-} else {
-    echo "<script>alert('아이디 혹은 비밀번호가 일치하지 않습니다.')</script>";
-    echo "<script>history.back()</script>";
+
+    echo "<script>alert('$ROOT_PATH/sangsahwa/sgindex.html');</script>";    // 로그인 성공시 리다이렉트
+    // echo "<script>location.href='$ROOT_PATH/'';</script>";    // 로그인 성공시 리다이렉트
 }
