@@ -20,6 +20,11 @@
         <div class="container px-4 px-lg-5 text-start">
             <!-- <a class="btn btn-gomain btn-xl" href="./index.html">메인으로</a> -->
         </div>
+        <style>
+            .small-subject {
+                color: palevioletred;
+            }
+        </style>
     </head>
     <body id="page-top">
         <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
@@ -46,12 +51,20 @@
                         <h2 class="mb-5">mySql</h2>
                         <h5 class="mb-5">환경변수 : Path 부분에 C:\xampp\mysql\bin 경로 추가 (xampp 아닐 경우 루트에서 mysql 찾기)</h5>
                         <h5 class="mb-5">
-                            DB생성
-                            <br>create database gitDev;
+                            <p class="small-subject">DB생성</p>
+                            create database gitDev;
                             <br>user gitDev;
-                            <hr style="color:green">root 변경
-                            <br>alter user root@localhost identified by '';
+                            <hr style="color:green">
+                            <p class="small-subject">root 변경</p>
+                            alter user root@localhost identified by '';
                             <br>flush privileges;
+                            <hr style="color:green">
+                            <p class="small-subject">유저 관련</p>
+                            create user ''@localhost / % identified by '';
+                            <br>flush privileges;
+                            <br>grant all privileges on [DB].* to [user]@localhost / %;
+                            
+                            
                         </h5>
                       
                     </div>
