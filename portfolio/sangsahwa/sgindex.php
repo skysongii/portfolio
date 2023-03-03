@@ -57,10 +57,18 @@
                         
                     </div>
                     <div class="col-lg-8 align-self-baseline">
-                        <p class="typing-main text-white-75 mb-5">회사 생활을 하면서 윗 사람에게, 아랫 사람에게 받았던 스트레스 다들 있으시죠?</p>
-                        <p class="typing-main text-white-75 mb-5">이 곳은 철저한 익명을 통해서 뒷담화를 할 수 있는 공간입니다.</p>
-                        <p class="typing-main text-white-75 mb-5">당연하게도 우리는 노이저로 활동하며 서로의 개인 정보를 알 수 없습니다. 우리에게 치명적이니까요.</p>
-                        
+                        <p class="typing-main1 text-white-75 mb-5">회사 생활을 하면서 윗 사람에게, 아랫 사람에게 받았던 스트레스 다들 있으시죠?</p>
+                        <p class="typing-main2 text-white-75 mb-6">이 곳은 철저한 익명을 통해서 뒷담화를 할 수 있는 공간입니다.</p>
+                        <p class="typing-main3 text-white-75 mb-5">당연하게도 우리는 노이저로 활동하며 서로의 개인 정보를 알 수 없습니다. 우리에게 치명적이니까요.</p>
+
+                        <?php
+                            function console_log($data){
+                                echo "<script>console.log( 'PHP_Console: " . $data . "' );</script>";
+                            }
+
+                        $testVal = "테스트 데이터";
+                        console_log($testVal);
+                        ?>
                         <p class="typing-body text-white-75 mb-5"></p>
                         <a class="btn btn-primary btn-xl" href="#about">더 자세한 내용을 다뤄볼까요?</a>
                     </div>
@@ -75,7 +83,8 @@
                         <h2 class="text-white mt-0">우리 플랫폼은 단순합니다.<br>물론 사용하기도 쉽죠</h2>
                         <hr class="divider divider-light" />
                         <p class="text-white-75 mb-4">상단 우측 카테고리에 있는 상사에게와 하사에게 메뉴를 통해<br>
-                        서로가 전하고 싶은 말을 하세요. <br><h2 class="just-free">공짜니까요</h2>.</p>
+                        서로가 전하고 싶은 말을 하세요.
+                            <br>
                         <a class="btn btn-light btn-xl" href="./login.html">바로 시작해요!</a>
                     </div>
                 </div>
@@ -108,8 +117,13 @@
     var ty_int_main;
     // 타이핑될 텍스트를 가져온다 
     var typingTxt = $(".typing-title").text(); 
-    var typing_main_Txt = $(".typing-main").text(); 
-    typingTxt=typingTxt.split(""); // 한글자씩 자른다. 
+    var typing_main_Txt1 = $(".typing-main1").text(); 
+    var typing_main_Txt2 = $(".typing-main2").text(); 
+    var typing_main_Txt3 = $(".typing-main3").text(); 
+
+    typingTxt1=typingTxt1.split(""); // 한글자씩 자른다. 
+    typingTxt2=typingTxt2.split(""); // 한글자씩 자른다. 
+    typingTxt3=typingTxt3.split(""); // 한글자씩 자른다. 
     
     if(typingBool==false){ 
       // 타이핑이 진행되지 않았다면 
@@ -118,9 +132,9 @@
     } 
          
     function typingHead(){ 
-      if(typingIdx<typingTxt.length){ 
+      if(typingIdx<typingTxt1.length){ 
         // 타이핑될 텍스트 길이만큼 반복 
-        $(".typing-head").append(typingTxt[typingIdx]);
+        $(".typing-head").append(typingTxt1[typingIdx]);
         // 한글자씩 이어준다. 
         typingIdx++; 
        } else{ 
