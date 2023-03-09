@@ -83,14 +83,15 @@
             background-color: #3367d6;
         }
         div {
-            font-size: 2rem;
+            font-size: 1rem;
             text-align: center;
             color: white;
             background: black;
             border-radius: 1rem;
             padding: 2rem;
             transition: all .5s ease;
-            width: 6.5%;
+            width: 7%;
+            height: 5px;
             float: left;
 
         }
@@ -103,15 +104,17 @@
 </head>
 <body>
 
-<h1>빙글빙글 돌아가는 업무일지 <p id="interval-time">00:00:00</p></h1>
+<h1>빙글빙글 돌아가는 업무일지 <p class="h1-clock">00:00:00</p></h1>
+
 
 <form>
-    <label for="start-time">시작시간: 입력해주세요</label>
-    <input type="text" id="start-time" name="start-time">
+    <label for="start-time">시작시간: 현재시간 고정</label>
+    <input type="text" id="start-time" name="start-time" readonly>
+
 
 
     <label for="end-time">종료시간: 입력해주세요 (ex:1300, 0930)</label>
-    <input type="text" id="end-time" name="end-time" onfocusout="endTimeFunc();">
+    <input type="number" id="end-time" name="end-time" onfocusout="endTimeFunc();">
 
     <label for="classification">구분:</label>
     <select id="classification" name="classification">
@@ -130,6 +133,7 @@
         <input type="submit" value="작업 저장하기"
                style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
         <br><br>
+
         <div id="1">1</div>
         <div id="2">2</div>
         <div id="3">3</div>
@@ -140,7 +144,24 @@
         <div id="8">8</div>
         <div id="9">9</div>
         <div id="0">0</div>
+
 <script>
+
+    const clock = document.querySelector('.h1-clock');
+
+    function getTime(){
+        const time = new Date();
+        const hour = time.getHours();
+        const minutes = time.getMinutes();
+        const seconds = time.getSeconds();
+        clock.innerHTML = `${hour<10 ? `0${hour}`:hour}:${minutes<10 ? `0${minutes}`:minutes}:${seconds<10 ? `0${seconds}`:seconds}`
+    }
+    function init(){
+        getTime();
+        setInterval(getTime, 1000);
+    }
+    init();
+
 
     const now = new Date();
     var now_hour = now.getHours();
@@ -163,17 +184,25 @@
     });
 
     function endTimeFunc() {
-        console.log();
+        var end_time = $("#end-time").val();
+        var end_time_length = end_time.length;
+        var end_time_arr = [];
+
+        for(i=0; i<end_time_length; i++) {
+            end_time_arr.push(i);
+            console.log(end_time_arr);
+        }
     };
 
     function getClock() {
-        // var now_hour = now.getHours();
-        // var now_minute = now.getMinutes();
-        // var now_second = now.getSeconds();
-        $("#interval-time").text(now_hour + ":" + now_minute + ":" + now_second);
+        $("#interval-time").text(`${now_hour}:${now_minute}:${now_second}`);
     };
-    getClock();
-    setInterval(getClock, 1000);
+
+    function timeInit() {
+        getClock();
+        setInterval(getClock, 1000);
+    };
+    timeInit();
 
 
     // 재미난 장난
