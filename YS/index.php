@@ -82,6 +82,7 @@
         input[type="submit"]:hover {
             background-color: #3367d6;
         }
+
         div {
             font-size: 1rem;
             text-align: center;
@@ -112,7 +113,6 @@
     <input type="text" id="start-time" name="start-time" readonly>
 
 
-
     <label for="end-time">종료시간: 입력해주세요 (ex:1300, 0930)</label>
     <input type="number" id="end-time" name="end-time" onfocusout="endTimeFunc();">
 
@@ -132,35 +132,44 @@
 
         <input type="submit" value="작업 저장하기"
                style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
-        <br><br>
+    </select>
+</form>
+<br><br>
 
-        <div id="1">1</div>
-        <div id="2">2</div>
-        <div id="3">3</div>
-        <div id="4">4</div>
-        <div id="5">5</div>
-        <div id="6">6</div>
-        <div id="7">7</div>
-        <div id="8">8</div>
-        <div id="9">9</div>
-        <div id="0">0</div>
+<div id="1">1</div>
+<div id="2">2</div>
+<div id="3">3</div>
+<div id="4">4</div>
+<div id="5">5</div>
+<div id="6">6</div>
+<div id="7">7</div>
+<div id="8">8</div>
+<div id="9">9</div>
+<div id="0">0</div>
 
 <script>
-
+    /**
+     * @author  : csh
+     * @date    : 2023-03-09
+     * 실시간 인터벌
+     */
     const clock = document.querySelector('.h1-clock');
 
-    function getTime(){
+    function getTime() {
         const time = new Date();
         const hour = time.getHours();
         const minutes = time.getMinutes();
         const seconds = time.getSeconds();
-        clock.innerHTML = `${hour<10 ? `0${hour}`:hour}:${minutes<10 ? `0${minutes}`:minutes}:${seconds<10 ? `0${seconds}`:seconds}`
+        clock.innerHTML = `${hour < 10 ? `0${hour}` : hour}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
     }
-    function init(){
+
+    function init() {
         getTime();
         setInterval(getTime, 1000);
     }
+
     init();
+    /*********************************************************************************************************************************/
 
 
     const now = new Date();
@@ -168,42 +177,44 @@
     var now_minute = now.getMinutes();
     var now_second = now.getSeconds();
     var now_ampm;
-    if (now_minute >= 0 && now_minute < 10) {
-        now_minute = "0"+ now_minute;
-    };
 
-    if (now_hour >= 0 && now_hour < 13) {
+    if (now_hour >= 13 && now_hour < 24) {  // 시 12형식으로 변환
+        now_hour = parseInt(now_hour) - 12;
+        console.log(`오후 ${now_hour} + ${typeof(now_hour)}시`);
+        // hour_int = parseInt(now_hour);
+    }
+    ;
+
+    if (now_minute >= 0 && now_minute < 10) {   // 분에 0 붙이기
+        now_minute = "0" + now_minute;
+    }
+    ;
+
+    if (now_hour >= 0 && now_hour < 13) {   // 오전 오후 구분
         now_ampm = "오전";
-    } else now_ampam = "오후";
+    } else now_ampm = "오후";
 
-    var now_time = now_ampm + " " + now_hour + ":" + now_minute;
+    var now_time = now_ampm + " " + now_hour + ":" + now_minute;    // 오전/오후 hh:mm
 
     $(function () {
         $("#start-time").val(now_time);
-
     });
 
+    /**
+     * @author  : csh
+     * @date    : 2023-03-09
+     * 종료시간 입력칸 포커스 아웃시 시간으로 변환
+     */
     function endTimeFunc() {
         var end_time = $("#end-time").val();
         var end_time_length = end_time.length;
         var end_time_arr = [];
 
-        for(i=0; i<end_time_length; i++) {
+        for (i = 0; i < end_time_length; i++) {
             end_time_arr.push(i);
             console.log(end_time_arr);
         }
     };
-
-    function getClock() {
-        $("#interval-time").text(`${now_hour}:${now_minute}:${now_second}`);
-    };
-
-    function timeInit() {
-        getClock();
-        setInterval(getClock, 1000);
-    };
-    timeInit();
-
 
     // 재미난 장난
     window.addEventListener("keydown", e => {
