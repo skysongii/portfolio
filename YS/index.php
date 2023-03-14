@@ -113,8 +113,8 @@
     <input type="text" id="start-time" name="start-time" readonly>
 
 
-    <label for="end-time">종료시간: 입력해주세요 (ex:1300, 0930)</label>
-    <input type="number" id="end-time" name="end-time" onfocusout="endTimeFunc();">
+    <label for="end-time">종료시간: 입력해주세요</label>
+    <input type="time" id="end-time" name="end-time" onclick="this.value=''" >
 
     <label for="classification">구분:</label>
     <select id="classification" name="classification">
@@ -125,7 +125,7 @@
         <option value="non-area">자리비움</option>
 
         <label for="time-required">소요시간:</label>
-        <input type="number" id="time-required" name="time-required" placeholder="분"><br><br>
+        <input type="number" id="time-required" name="time-required" placeholder="분" readonly><br><br>
 
         <label for="details">상세 내용:</label>
         <textarea id="details" name="details" rows="10" cols="20" placeholder="업무 상세 내용을 입력해주세요."></textarea><br><br>
@@ -208,12 +208,34 @@
     function endTimeFunc() {
         var end_time = $("#end-time").val();
         var end_time_length = end_time.length;
-        var end_time_arr = [];
+        var end_time_hour = end_time.substring(0,2);
+        var end_time_minute = end_time.substring(2);
+        var ampm = "오전";
 
-        for (i = 0; i < end_time_length; i++) {
-            end_time_arr.push(i);
-            console.log(end_time_arr);
+        var end_time_string;
+
+        end_time_hour = parseInt(end_time_hour);
+
+        console.log(`1번째 : ${end_time_hour}`);
+
+        if (end_time_hour < 0 || end_time_hour > 25) {
+            alert("장난 하지마 이쒸");
+            end_time_string = "444444444444444444444444444444444444444";
         }
+        else if(end_time_hour > 12) {
+            ampm = "오후";
+            end_time_hour -= 12;
+            end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
+            console.log(end_time_string);
+        }
+        else if(end_time_hour < 13) {
+            end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
+            console.log(end_time_string);
+        }
+
+        $("#end-time").val(end_time_string);
+
+
     };
 
     // 재미난 장난
