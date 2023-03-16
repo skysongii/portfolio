@@ -182,7 +182,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
         var gubun = document.getElementById("classification");
         var value = (gubun.options[gubun.selectedIndex].value);
         // var gubun = $("#classification").val();
-        // console.log(value);
+        console.log(value);
     }
 
     /*********************************************************************************************************************************/
@@ -194,7 +194,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
     var now_second = now.getSeconds();
     var now_ampm;
 
-    if (now_hour >= 13 && now_hour < 24) {  // 시 12형식으로 변환
+    if (now_hour >= 12 && now_hour < 24) {  // 시 12형식으로 변환
         now_hour = parseInt(now_hour) - 12;
         // console.log(`오후 ${now_hour} + ${typeof(now_hour)}시`);
         // hour_int = parseInt(now_hour);
@@ -244,10 +244,15 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
             alert("장난 하지마 이쒸");
             end_time_string = "444444444444444444444444444444444444444";
         }
-        else if(end_time_hour > 12) {
+        else if(end_time_hour >= 12) {
             ampm = "오후";
-            end_time_hour -= 12;
-            end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
+            if (end_time_hour == 12) {
+                end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
+            }
+            else {
+                end_time_hour -= 12;
+                end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
+            }
             console.log(end_time_string);
         }
         else if(end_time_hour < 13) {
