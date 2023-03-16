@@ -11,6 +11,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>빙글빙글 돌아가는 업무일지</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -116,7 +117,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
 <h1>빙글빙글 돌아가는 업무일지 <p class="h1-clock">00:00:00</p></h1>
 
 
-<form action="./insert_ys.php" method="get">
+<form method="get" onsubmit="alertFunc()">
     <label for="start-time">시작시간: 현재시간 고정</label>
     <input type="text" id="start-time" name="start-time" readonly>
 
@@ -135,7 +136,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
         <label for="details">상세 내용:</label>
         <textarea id="details" name="details" rows="10" cols="20" placeholder="업무 상세 내용을 입력해주세요."></textarea><br><br>
 
-        <input type="submit" value="작업 저장하기"
+        <input type="submit" id="submit-button" value="작업 저장하기"
                style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
     </select>
 </form>
@@ -175,6 +176,45 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
 
     /**
      * @author  : csh
+     * @date    : 2023-03-09
+     * 종료시간 입력칸 포커스 아웃시 시간으로 변환
+     */
+    function endTimeFunc() {
+        var end_time = $("#end-time").val();
+        var end_time_length = end_time.length;
+        var end_time_hour = end_time.substring(0,2);
+        var end_time_minute = end_time.substring(2);
+        var ampm = "오전";
+
+        var end_time_string;
+
+        end_time_hour = parseInt(end_time_hour);
+
+        if (end_time_hour < 0 || end_time_hour > 25) {
+            alert("장난 하지마 이쒸");
+            end_time_string = "444444444444444444444444444444444444444";
+        }
+        else if(end_time_hour >= 12) {
+            ampm = "오후";
+            if (end_time_hour == 12) {
+                end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
+            }
+            else {
+                end_time_hour -= 12;
+                end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
+            }
+            console.log(end_time_string);
+        }
+        else if(end_time_hour < 13) {
+            end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
+            console.log(end_time_string);
+        }
+
+        $("#end-time").val(end_time_string);
+    };
+
+    /**
+     * @author  : csh
      * @date    : 2023-03-16
      * 구분선택
      */
@@ -185,6 +225,19 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
         console.log(value);
     }
 
+    /**
+     * @author  : csh
+     * @date    : 2023-03-16
+     * 얼럿창 디자인 및 클릭이벤트
+     */
+    function alertFunc() {
+            // Swal.fire({
+            //     icon: 'success',
+            //     title: 'Alert가 실행되었습니다.',
+            //     text: '이곳은 내용이 나타나는 곳입니다.',
+            // });
+        swal("제목", "내용", "warning");
+    }
     /*********************************************************************************************************************************/
 
 
@@ -224,44 +277,6 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
 
 
 
-    /**
-     * @author  : csh
-     * @date    : 2023-03-09
-     * 종료시간 입력칸 포커스 아웃시 시간으로 변환
-     */
-    function endTimeFunc() {
-        var end_time = $("#end-time").val();
-        var end_time_length = end_time.length;
-        var end_time_hour = end_time.substring(0,2);
-        var end_time_minute = end_time.substring(2);
-        var ampm = "오전";
-
-        var end_time_string;
-
-        end_time_hour = parseInt(end_time_hour);
-
-        if (end_time_hour < 0 || end_time_hour > 25) {
-            alert("장난 하지마 이쒸");
-            end_time_string = "444444444444444444444444444444444444444";
-        }
-        else if(end_time_hour >= 12) {
-            ampm = "오후";
-            if (end_time_hour == 12) {
-                end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
-            }
-            else {
-                end_time_hour -= 12;
-                end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
-            }
-            console.log(end_time_string);
-        }
-        else if(end_time_hour < 13) {
-            end_time_string = `${ampm} ${end_time_hour}:${end_time_minute}`;
-            console.log(end_time_string);
-        }
-
-        $("#end-time").val(end_time_string);
-    };
 
     // 재미난 장난
     window.addEventListener("keydown", e => {
