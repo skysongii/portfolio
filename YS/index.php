@@ -1,3 +1,9 @@
+<?php
+$ROOT_PATH = "/dashboard/gitDev/YS";
+
+include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,9 +97,10 @@
             border-radius: 1rem;
             padding: 2rem;
             transition: all .5s ease;
-            width: 7%;
+            width: 3%;
             height: 5px;
             float: left;
+            margin-left: 3%;
 
         }
 
@@ -103,29 +110,27 @@
         }
     </style>
 </head>
+
 <body>
 
 <h1>빙글빙글 돌아가는 업무일지 <p class="h1-clock">00:00:00</p></h1>
 
 
-<form>
+<form action="./insert_ys.php" method="get">
     <label for="start-time">시작시간: 현재시간 고정</label>
     <input type="text" id="start-time" name="start-time" readonly>
 
 
     <label for="end-time">종료시간: 입력해주세요</label>
-    <input type="time" id="end-time" name="end-time" onclick="this.value=''" >
+    <input type="text" id="end-time" name="end-time" onclick="this.value=''" placeholder="ex)0900, 1829" onfocusout="endTimeFunc();">
 
     <label for="classification">구분:</label>
-    <select id="classification" name="classification">
+    <select id="classification" name="classification" onfocusout="selectionFunc();">
         <option value="arrive">출근</option>
         <option value="leave">퇴근</option>
         <option value="work">업무</option>
         <option value="non-work">업무 외 행동</option>
         <option value="non-area">자리비움</option>
-
-        <label for="time-required">소요시간:</label>
-        <input type="number" id="time-required" name="time-required" placeholder="분" readonly><br><br>
 
         <label for="details">상세 내용:</label>
         <textarea id="details" name="details" rows="10" cols="20" placeholder="업무 상세 내용을 입력해주세요."></textarea><br><br>
@@ -168,7 +173,18 @@
         setInterval(getTime, 1000);
     }
 
-    init();
+    /**
+     * @author  : csh
+     * @date    : 2023-03-16
+     * 구분선택
+     */
+    function selectionFunc() {
+        var gubun = document.getElementById("classification");
+        var value = (gubun.options[gubun.selectedIndex].value);
+        // var gubun = $("#classification").val();
+        // console.log(value);
+    }
+
     /*********************************************************************************************************************************/
 
 
@@ -180,7 +196,7 @@
 
     if (now_hour >= 13 && now_hour < 24) {  // 시 12형식으로 변환
         now_hour = parseInt(now_hour) - 12;
-        console.log(`오후 ${now_hour} + ${typeof(now_hour)}시`);
+        // console.log(`오후 ${now_hour} + ${typeof(now_hour)}시`);
         // hour_int = parseInt(now_hour);
     }
     ;
@@ -196,9 +212,17 @@
 
     var now_time = now_ampm + " " + now_hour + ":" + now_minute;    // 오전/오후 hh:mm
 
+    var aaa = new Date(now_time);
+    console.log(aaa);
+
     $(function () {
         $("#start-time").val(now_time);
+        init();
+
+        // console.log($("#start-time").val())
     });
+
+
 
     /**
      * @author  : csh
@@ -216,8 +240,6 @@
 
         end_time_hour = parseInt(end_time_hour);
 
-        console.log(`1번째 : ${end_time_hour}`);
-
         if (end_time_hour < 0 || end_time_hour > 25) {
             alert("장난 하지마 이쒸");
             end_time_string = "444444444444444444444444444444444444444";
@@ -234,8 +256,6 @@
         }
 
         $("#end-time").val(end_time_string);
-
-
     };
 
     // 재미난 장난
