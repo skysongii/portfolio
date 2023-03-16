@@ -11,7 +11,8 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>빙글빙글 돌아가는 업무일지</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -117,7 +118,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
 <h1>빙글빙글 돌아가는 업무일지 <p class="h1-clock">00:00:00</p></h1>
 
 
-<form method="get" onsubmit="alertFunc()">
+<form method="get" onsubmit="chkResult();">
     <label for="start-time">시작시간: 현재시간 고정</label>
     <input type="text" id="start-time" name="start-time" readonly>
 
@@ -230,14 +231,27 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
      * @date    : 2023-03-16
      * 얼럿창 디자인 및 클릭이벤트
      */
-    function alertFunc() {
-            // Swal.fire({
-            //     icon: 'success',
-            //     title: 'Alert가 실행되었습니다.',
-            //     text: '이곳은 내용이 나타나는 곳입니다.',
-            // });
-        swal("제목", "내용", "warning");
+        var alertSwal = function(msg, type) {
+            swal({
+                title : '',
+                text : msg,
+                type : type,
+                timer : 1500,
+                customClass : 'sweet-size',
+                showConfirmButton : false
+            });
+        };
+
+    /**
+     * @author  : csh
+     * @date    : 2023-03-16
+     * 작성완료 버튼시 ajax 및 alertSwal() 호출
+     */
+    function chkResult() {
+        alert(12);
+        // alertSwal('성공','success');
     }
+
     /*********************************************************************************************************************************/
 
 
