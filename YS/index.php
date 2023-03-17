@@ -11,8 +11,8 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>빙글빙글 돌아가는 업무일지</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.5/dist/sweetalert2.all.min.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -114,6 +114,7 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
 </head>
 
 <body>
+<button onclick="Alert();">Alert</button>
 
 <h1>빙글빙글 돌아가는 업무일지 <p class="h1-clock">00:00:00</p></h1>
 
@@ -252,6 +253,18 @@ include_once $_SERVER["DOCUMENT_ROOT"] .$ROOT_PATH. "/connect.php";
         // alertSwal('성공','success');
     }
 
+
+    /********************/
+    Swal.fire({
+        title: 'Success!',
+        text: 'Your action was successful.',
+        icon: 'success',
+        confirmButtonText: 'Okay'
+    });
+    function Alert() {
+        Swal.fire();
+    }
+    /********************/
     /*********************************************************************************************************************************/
 
 
